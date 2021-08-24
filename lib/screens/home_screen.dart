@@ -3,7 +3,7 @@ import 'package:movie_app_ui/customWidgets/custom_widgets.dart';
 import 'package:movie_app_ui/data/data.dart';
 
 class HomeScreen extends StatefulWidget {
-  // const ({ Key? key }) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -50,20 +50,33 @@ class _HomeScreenState extends State<HomeScreen> {
           SliverPadding(
             padding: const EdgeInsets.only(top: 20),
             sliver: SliverToBoxAdapter(
-              child: Previews(title: 'Previews', contentList: previews),
+              child: Previews(
+                  key: PageStorageKey('previews'),
+                  title: 'Previews',
+                  contentList: previews),
             ),
           ),
           SliverToBoxAdapter(
-            child: ContentList(title: 'My List', contentList: myList),
+            child: ContentList(
+                key: PageStorageKey('myList'),
+                title: 'My List',
+                contentList: myList),
           ),
           SliverToBoxAdapter(
             child: ContentList(
+                key: PageStorageKey('originals'),
                 title: 'Netflix Originals',
                 contentList: originals,
                 isOriginals: true),
           ),
-          SliverToBoxAdapter(
-            child: ContentList(title: 'Trending', contentList: trending),
+          SliverPadding(
+            padding: const EdgeInsets.only(bottom: 20),
+            sliver: SliverToBoxAdapter(
+              child: ContentList(
+                  key: PageStorageKey('trending'),
+                  title: 'Trending',
+                  contentList: trending),
+            ),
           )
         ],
       ),
